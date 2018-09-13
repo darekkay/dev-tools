@@ -1,0 +1,197 @@
+a,
+a:hover,
+a:visited {
+  color: inherit;
+  text-decoration: underline;
+}
+
+main {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+footer {
+  display: none;
+  margin-top: auto;
+  font-size: 1.6rem;
+}
+
+#display-alpha footer {
+  align-self: flex-end;
+}
+
+#display-beta footer {
+  align-self: flex-start;
+}
+
+.color-display {
+  width: 100%;
+  padding: 4rem 2rem 2rem 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+@media (min-width: 480px) {
+  main {
+    flex-direction: row;
+  }
+
+  .color-display {
+    width: 50%;
+  }
+
+  footer {
+    display: block;
+  }
+}
+
+/* INPUT */
+
+.input-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.color-input {
+  display: inline-block;
+  width: 100%;
+  max-width: 335px;
+  text-align: center;
+  margin: 0.2rem 1rem 1rem 4rem;
+
+  font-size: 3rem;
+  line-height: 4rem;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #222;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.4);
+}
+
+.dark .color-input {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+/* COLOR PICKER */
+
+.color-picker {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 100%;
+  outline: none;
+  padding: 0;
+  -webkit-appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.color-picker::-moz-color-swatch {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.color-picker::-webkit-color-swatch {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.dark .color-picker::-moz-color-swatch {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .color-picker::-webkit-color-swatch {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+/* OUTPUT */
+
+output {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 2.5rem;
+}
+
+/* CONTRAST RATIO */
+
+.contrast-ratio {
+  background-color: #006aff;
+  color: #000;
+  font-size: 2.2rem;
+  font-weight: bold;
+  width: 10rem;
+  height: 10rem;
+  min-height: 10rem;
+  border-radius: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contrast-ratio.wcag-fail {
+  background-color: #c00;
+  color: #fff;
+}
+
+.contrast-ratio.wcag-aa {
+  background-color: orange;
+}
+
+.contrast-ratio.wcag-aaa {
+  background-color: #d2e858;
+}
+
+.example {
+  padding: 0;
+  border: 0;
+
+  color: inherit;
+
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 1.7rem;
+  font-weight: normal;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.example:hover {
+  text-decoration: underline;
+}
+
+.light output,
+.light footer,
+.light a {
+  color: #000;
+}
+
+.dark output,
+.dark footer,
+.dark a {
+  color: #fff;
+}
+
+canvas {
+  visibility: hidden;
+}

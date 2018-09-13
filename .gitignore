@@ -1,0 +1,15 @@
+### Node.js ###
+
+/node_modules
+.env
+
+### IDE ###
+
+/.idea/workspace.xml
+/.idea/tasks.xml
+
+### App ###
+
+/build
+/dist
+*.log

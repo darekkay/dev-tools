@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="color-tools/colors.css">
+  <link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAI0lEQVQ4T2O8+27VfwY8wNWkAp80A+OoAaNhwMAwGgbDIwwAYHtGYVE+aBgAAAAASUVORK5CYII=" id="favicon">
+  <title>Color Tools</title>
+</head>
+<body>
+  <main>
+    <div class="color-display" id="display-alpha">
+      <div class="input-wrapper">
+        <label class="sr-only" for="input-alpha">Color 1</label>
+        <input id="input-alpha" class="color-input" autocomplete="off" type="text">
+        <label class="sr-only" for="picker-alpha">Color picker 1</label>
+        <input id="picker-alpha" class="color-picker" type="color" value="#ddeeaa" tabindex="-1">
+      </div>
+
+      <output class="output-hex"></output>
+      <output class="output-rgb"></output>
+
+      <p>A simple, open-source, ad-free color converter and visualizer.</p>
+
+      <ul>
+        <li>Many color formats are supported, for example
+          <ul>
+            <li><button class="example example-alpha" tabindex="-1">#ff9928</button></li>
+            <li><button class="example example-alpha" tabindex="-1">rgba(124, 96, 200, .7)</button></li>
+            <li><button class="example example-alpha" tabindex="-1">hsl(120, 75%, 75%)</button></li>
+            <li><button class="example example-alpha" tabindex="-1">deepskyblue</button></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Paenitet me quod tu me rogas? Oh, sic, qui stultus plastic continentis rogavi te ut emas. Vides non manducare acidum hydrofluoric per plastic. Erit autem dissolvere metalli petram, vitrum, tellus. Ita quod illic '. Quam de aliquo cum aliqua interdum, maybe? Aliquid viride, huh? Quam vos sunt etiam vivere?</p>
+
+      <footer>
+        Handmade with ♥ by <a href="https://darekkay.com" target="_blank" rel="noopener" tabindex="-1">Darek Kay</a>
+      </footer>
+    </div>
+
+
+    <div class="color-display" id="display-beta">
+      <div class="input-wrapper">
+        <label class="sr-only" for="input-beta">Color 1</label>
+        <input id="input-beta" class="color-input" autocomplete="off" type="text">
+        <label class="sr-only" for="picker-beta">Color picker 1</label>
+        <input id="picker-beta" class="color-picker" type="color" value="#222222" tabindex="-1">
+      </div>
+
+      <output class="output-hex"></output>
+      <output class="output-rgb"></output>
+
+      <p>Quinquaginta septem est - pars tua, triginta quinque millia. Est autem extra plus quindecim, tota tua est, quom meruisset. Fac nos fecit. Puto quia una res potest - venimus in cognitionem. Vide pretium in manibus. Sed finge iustum faciens quod qualibet septimana. Duis duas libras triginta quinque milia pondo.</p>
+
+      <p><strong>WCAG Contrast Ratio</strong></p>
+      <div id="contrast-ratio" class="contrast-ratio wcag-aaa">12.79</div>
+
+      <footer>
+        View on <a href="https://github.com/darekkay/dev-tools" target="_blank" rel="noopener" tabindex="-1">GitHub</a>
+      </footer>
+    </div>
+  </main>
+
+  <script src="assets/lib/one-color-all.js"></script>
+  <script src="color-tools/colors.js"></script>
+</body>
+</html>

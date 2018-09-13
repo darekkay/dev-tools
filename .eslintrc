@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "root": true,
+  "rules": {
+    "prettier/prettier": "error",
+    "linebreak-style": "off",
+    "no-undef": "off",
+    "radix": "off"
+  }
+}

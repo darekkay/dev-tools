@@ -127,6 +127,13 @@ const preparePanels = (panel, otherPanel) => {
       setInputValue(panel, example.innerText);
     });
   });
+
+  Object.values(panel.output).forEach(output =>
+    output.addEventListener("click", () => {
+      // select output value on click
+      window.getSelection().selectAllChildren(output);
+    })
+  );
 };
 
 preparePanels(alpha, beta);

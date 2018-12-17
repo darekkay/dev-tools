@@ -7,7 +7,8 @@ const selectElements = name => {
     examples: Array.from(document.getElementsByClassName(`example-${name}`)),
     output: {
       hex: display.getElementsByClassName("output-hex")[0],
-      rgb: display.getElementsByClassName("output-rgb")[0]
+      rgb: display.getElementsByClassName("output-rgb")[0],
+      hsl: display.getElementsByClassName("output-hsl")[0]
     }
   };
 };
@@ -68,6 +69,16 @@ const updateFavicon = () => {
   document.getElementById("favicon").setAttribute("href", canvas.toDataURL());
 };
 
+const toHSL = color => {
+  const hue = Math.round(color.hue() * 360);
+  // eslint-disable-next-line no-underscore-dangle
+  const saturation = Math.round(color.hsl()._saturation * 100);
+  const lightness = Math.round(color.lightness() * 100);
+  const alphaValue = color.alpha();
+  if (alphaValue === 1) return `hsl(${hue},${saturation}%,${lightness}%)`;
+  return `hsla(${hue},${saturation}%,${lightness}%,${alphaValue})`;
+};
+
 /* eslint-disable no-param-reassign */
 const updateColor = (panel, otherPanel, color) => {
   panel.display.style.background = color.cssa();
@@ -75,7 +86,7 @@ const updateColor = (panel, otherPanel, color) => {
 
   panel.output.rgb.innerText = color.alpha() === 1 ? color.css() : color.cssa();
   panel.output.hex.innerText = color.hex();
-
+  panel.output.hsl.innerText = toHSL(color);
   panel.picker.value = color.hex();
 
   toggleClass(panel.display, {

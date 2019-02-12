@@ -12,15 +12,9 @@ const files = {
   build: "dist"
 };
 
-gulp.task("default", ["build", "watch"]);
+const clean = () => del([`${files.build}/*`]);
 
-gulp.task("build", ["clean"], () =>
-  gulp.start(["build:html", "build:js", "build:css", "build:static"])
-);
-
-gulp.task("clean", () => del([`${files.build}/*`]));
-
-gulp.task("build:html", () =>
+const buildHTML = () =>
   gulp
     .src(files.html)
     .pipe(
@@ -38,10 +32,9 @@ gulp.task("build:html", () =>
       })
     )
     .pipe(gulp.dest(files.build))
-    .on("error", console.error)
-);
+    .on("error", console.error);
 
-gulp.task("build:js", () =>
+const buildJS = () =>
   gulp
     .src(files.js)
     .pipe(
@@ -57,28 +50,35 @@ gulp.task("build:js", () =>
       })
     )
     .pipe(gulp.dest(files.build))
-    .on("error", console.error)
-);
+    .on("error", console.error);
 
-gulp.task("build:css", () =>
+const buildCSS = () =>
   gulp
     .src(files.css)
     .pipe(plugins.plumber())
     .pipe(plugins.cssmin())
     .pipe(gulp.dest(files.build))
-    .on("error", console.error)
-);
+    .on("error", console.error);
 
-gulp.task("build:static", () =>
+const buildStatic = () =>
   gulp
     .src(files.static)
     .pipe(gulp.dest(files.build))
-    .on("error", console.error)
+    .on("error", console.error);
+
+const build = gulp.series(
+  clean,
+  gulp.parallel(buildHTML, buildJS, buildCSS, buildStatic)
 );
 
-gulp.task("watch", () => {
-  gulp.watch(files.html, ["build:html"]);
-  gulp.watch(files.js, ["build:js"]);
-  gulp.watch(files.css, ["build:css"]);
-  gulp.watch(files.static, ["build:static"]);
-});
+const watch = () => {
+  gulp.watch(files.html, buildHTML);
+  gulp.watch(files.js, buildJS);
+  gulp.watch(files.css, buildCSS);
+  gulp.watch(files.static, buildStatic);
+};
+
+exports.build = build;
+exports.watch = watch;
+
+exports.default = gulp.series(build, watch);

@@ -14,19 +14,19 @@
     body {
       display: flex;
       flex-direction: column;
-      justify-content: stretch;
     }
 
     main {
-      flex: 1;
+      flex: 1 0 auto;
       width: 100%;
       max-width: 800px;
       margin: 4rem auto;
-      padding: 1rem 2.5rem;
+      padding: 0 2.5rem;
     }
 
     header,
     footer {
+      flex: none;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -88,6 +88,10 @@
       margin: 1rem 1rem 3.5rem;
       text-align: center;
       width: 100%;
+    }
+
+    .project,
+    .project-description {
       max-width: 335px;
     }
 
@@ -110,12 +114,12 @@
       <li class="project">
         <a href="color-tools.html"><img src="assets/img/preview-color-tools.png" alt=""></a>
         <strong><a href="color-tools.html">Color Tools</a></strong>
-        <div>A simple color converter and visualizer</div>
+        <div class="project-description">A simple color converter and visualizer</div>
       </li>
       <li class="project">
         <a href="flexbox-cheatsheet.html"><img src="assets/img/preview-flexbox-cheatsheet.png" alt=""></a>
         <strong><a href="flexbox-cheatsheet.html">Flexbox Cheatsheet</a></strong>
-        <div>A graphical overview of the CSS Flexible Box Layout properties</div>
+        <div class="project-description">A graphical overview of the CSS Flexible Box Layout properties</div>
       </li>
     </ul>
   </main>

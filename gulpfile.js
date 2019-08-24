@@ -56,7 +56,15 @@ const buildCSS = () =>
   gulp
     .src(files.css)
     .pipe(plugins.plumber())
-    .pipe(plugins.cssmin())
+    .pipe(
+      plugins.cleanCss({
+        level: {
+          2: {
+            all: true
+          }
+        }
+      })
+    )
     .pipe(gulp.dest(files.build))
     .on("error", console.error);
 

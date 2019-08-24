@@ -33,9 +33,8 @@ const normalizeValue = value => (value ? value.trim() : value);
 const getColor = value => one.color(normalizeValue(value));
 
 const toggleClass = (element, conditions) => {
-  Object.entries(conditions).forEach(
-    ([key, value]) =>
-      value ? element.classList.add(key) : element.classList.remove(key)
+  Object.entries(conditions).forEach(([key, value]) =>
+    value ? element.classList.add(key) : element.classList.remove(key)
   );
 };
 

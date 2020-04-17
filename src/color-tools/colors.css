@@ -38,7 +38,7 @@ footer {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 }
 
@@ -141,6 +141,16 @@ output {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   font-size: 2.5rem;
+  display: block;
+}
+
+.output-additional {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.output-additional output {
+  font-size: 1.8rem;
 }
 
 /* CONTRAST RATIO */

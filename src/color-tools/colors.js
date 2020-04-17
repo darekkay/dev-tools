@@ -8,7 +8,9 @@ const selectElements = name => {
     output: {
       hex: display.getElementsByClassName("output-hex")[0],
       rgb: display.getElementsByClassName("output-rgb")[0],
-      hsl: display.getElementsByClassName("output-hsl")[0]
+      hsl: display.getElementsByClassName("output-hsl")[0],
+      luminance: display.getElementsByClassName("output-luminance")[0],
+      grade: display.getElementsByClassName("output-grade")[0]
     }
   };
 };
@@ -78,6 +80,34 @@ const toHSL = color => {
   return `hsla(${hue},${saturation}%,${lightness}%,${alphaValue})`;
 };
 
+/* USWDS Grade values: https://designsystem.digital.gov/design-tokens/color/overview/ */
+const gradeValues = [
+  [0, 1, 1],
+  [5, 0.93, 0.85],
+  [10, 0.82, 0.75],
+  [20, 0.65, 0.5],
+  [30, 0.45, 0.35],
+  [40, 0.3, 0.25],
+  [50, 0.1833, 0.175],
+  [60, 0.125, 0.1],
+  [70, 0.07, 0.05],
+  [80, 0.04, 0.02],
+  [90, 0.012, 0.015],
+  [100, 0, 0]
+];
+
+const toGrade = color => {
+  const luminance = color.luminance();
+  if (luminance === 0) return 100;
+  if (luminance === 1) return 0;
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < gradeValues.length; i++) {
+    const limits = gradeValues[i];
+    if (luminance < limits[1] && luminance > limits[2]) return limits[0];
+  }
+  return "-";
+};
+
 /* eslint-disable no-param-reassign */
 const updateColor = (panel, otherPanel, color) => {
   panel.display.style.background = color.cssa();
@@ -86,6 +116,10 @@ const updateColor = (panel, otherPanel, color) => {
   panel.output.rgb.innerText = color.alpha() === 1 ? color.css() : color.cssa();
   panel.output.hex.innerText = color.hex();
   panel.output.hsl.innerText = toHSL(color);
+  panel.output.luminance.innerText = `Luminance: ${Math.round(
+    color.luminance() * 100000
+  ) / 100000}`;
+  panel.output.grade.innerText = `USWDS grade: ${toGrade(color)}`;
   panel.picker.value = color.hex();
 
   toggleClass(panel.display, {

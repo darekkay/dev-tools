@@ -127,15 +127,17 @@ const updateColor = (panel, otherPanel, color) => {
     light: color.isLight()
   });
 
+  updateContrastRatio();
+  updateFavicon();
+};
+
+const saveValuesAsHash = () => {
   if (alpha.input.value && beta.input.value) {
     // save state to url hash
     window.location.hash = encodeURIComponent(
       `${alpha.input.value}-and-${beta.input.value}`
     );
   }
-
-  updateContrastRatio();
-  updateFavicon();
 };
 
 const setInputValue = (panel, value) => {
@@ -148,6 +150,7 @@ const preparePanels = (panel, otherPanel) => {
     const color = getColor(event.target.value);
     if (color) {
       updateColor(panel, otherPanel, color);
+      saveValuesAsHash();
     }
   });
 
@@ -186,12 +189,24 @@ preparePanels(beta, alpha);
 updateColor(alpha, beta, defaultAlphaColor);
 updateColor(beta, alpha, defaultBetaColor);
 
-const { hash } = window.location;
-if (hash) {
-  // load state from URL hash
-  const state = decodeURIComponent(hash.substring(1)).split("-and-");
-  if (state.length === 2) {
-    setInputValue(alpha, state[0]);
-    setInputValue(beta, state[1]);
+const loadFromHash = () => {
+  const { hash } = window.location;
+  if (hash) {
+    // load state from URL hash
+    const state = decodeURIComponent(hash.substring(1)).split("-and-");
+    if (state.length === 2) {
+      const alphaColor = getColor(state[0]);
+      const betaColor = getColor(state[1]);
+
+      if (alphaColor && betaColor) {
+        alpha.input.value = state[0];
+        beta.input.value = state[1];
+        updateColor(alpha, beta, alphaColor);
+        updateColor(beta, alpha, betaColor);
+      }
+    }
   }
-}
+};
+loadFromHash();
+
+window.addEventListener("hashchange", loadFromHash);

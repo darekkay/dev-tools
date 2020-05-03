@@ -15,6 +15,7 @@
     "prettier/prettier": "error",
     "linebreak-style": "off",
     "no-undef": "off",
+    "prefer-destructuring": "off",
     "radix": "off"
   }
 }

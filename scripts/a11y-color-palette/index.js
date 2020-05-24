@@ -113,8 +113,13 @@ const findViolations = (palette, magicNumber) =>
       )
   );
 
+const displayNumberOfColors = ({ name, palette }) => console.log(name, flattenPalette(palette).length);
+
 // Uncomment to output all violations for a given palette and constraint
 // findViolations(paletteIBMv2, { value: 50, ratio: 4.5 });
 
 // Uncomment to calculate all magic numbers
 // console.log(calculateAllMagicNumbers());
+
+// Uncomment to see the number of defined colors
+allPalettes.forEach(displayNumberOfColors);

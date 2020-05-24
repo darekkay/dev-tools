@@ -6,7 +6,9 @@
   "bugs": {
     "url": "https://github.com/darekkay/dev-tools/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "onecolor": "3.1.0"
+  },
   "devDependencies": {
     "@babel/core": "7.5.5",
     "@babel/preset-env": "7.5.5",

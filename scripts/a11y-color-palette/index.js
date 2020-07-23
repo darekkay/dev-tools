@@ -103,6 +103,8 @@ const calculateAllMagicNumbers = () => {
       magicNumbers[name][level] = "-";
     });
   });
+
+  return magicNumbers;
 };
 
 const findViolations = (palette, magicNumber) =>
@@ -119,7 +121,7 @@ const displayNumberOfColors = ({ name, palette }) => console.log(name, flattenPa
 // findViolations(paletteIBMv2, { value: 50, ratio: 4.5 });
 
 // Uncomment to calculate all magic numbers
-// console.log(calculateAllMagicNumbers());
+console.log(calculateAllMagicNumbers());
 
 // Uncomment to see the number of defined colors
-allPalettes.forEach(displayNumberOfColors);
+// allPalettes.forEach(displayNumberOfColors);

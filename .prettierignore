@@ -1,0 +1,11 @@
+node_modules
+/.git
+/.idea
+/dist
+/build
+/public
+/src/assets
+
+*.min.js
+*.min.css
+*.html

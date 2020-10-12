@@ -26,7 +26,7 @@
     "gulp-plumber": "1.2.1",
     "gulp-rename": "1.4.0",
     "gulp-uglify": "3.0.2",
-    "prettier": "1.18.2"
+    "prettier": "2.1.2"
   },
   "license": "MIT",
   "repository": {
@@ -35,7 +35,7 @@
   },
   "scripts": {
     "build": "gulp build",
-    "format": "prettier --write -- \"{src,bin,test}/**/*.{js,json}\"",
+    "format": "prettier --write .",
     "lint": "eslint --fix **/*.js"
   }
 }

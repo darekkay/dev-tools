@@ -9,7 +9,7 @@ const files = {
   js: ["src/**/*.js", "!src/**/lib/**"],
   css: "src/**/*.css",
   static: ["src/**/lib/**", "src/**/*.png"],
-  build: "dist"
+  build: "dist",
 };
 
 const clean = () => del([`${files.build}/*`]);
@@ -28,7 +28,7 @@ const buildHTML = () =>
         removeComments: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
+        useShortDoctype: true,
       })
     )
     .pipe(gulp.dest(files.build))
@@ -39,14 +39,14 @@ const buildJS = () =>
     .src(files.js)
     .pipe(
       plugins.babel({
-        presets: ["@babel/env"]
+        presets: ["@babel/env"],
       })
     )
     .pipe(
       plugins.uglify({
         output: {
-          ascii_only: true
-        }
+          ascii_only: true,
+        },
       })
     )
     .pipe(gulp.dest(files.build))
@@ -60,9 +60,9 @@ const buildCSS = () =>
       plugins.cleanCss({
         level: {
           2: {
-            all: true
-          }
-        }
+            all: true,
+          },
+        },
       })
     )
     .pipe(gulp.dest(files.build))

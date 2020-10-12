@@ -1,4 +1,4 @@
-const selectElements = name => {
+const selectElements = (name) => {
   const display = document.getElementById(`display-${name}`);
   return {
     display,
@@ -10,8 +10,8 @@ const selectElements = name => {
       rgb: display.getElementsByClassName("output-rgb")[0],
       hsl: display.getElementsByClassName("output-hsl")[0],
       luminance: display.getElementsByClassName("output-luminance")[0],
-      grade: display.getElementsByClassName("output-grade")[0]
-    }
+      grade: display.getElementsByClassName("output-grade")[0],
+    },
   };
 };
 
@@ -30,9 +30,9 @@ canvas.width = 16;
 canvas.height = 16;
 document.body.appendChild(canvas);
 
-const normalizeValue = value => (value ? value.trim() : value);
+const normalizeValue = (value) => (value ? value.trim() : value);
 
-const getColor = value => one.color(normalizeValue(value));
+const getColor = (value) => one.color(normalizeValue(value));
 
 const toggleClass = (element, conditions) => {
   Object.entries(conditions).forEach(([key, value]) =>
@@ -51,7 +51,7 @@ const updateContrastRatio = () => {
   toggleClass(contrastRatio, {
     "wcag-aaa": contrast >= 7.1,
     "wcag-aa": contrast >= 4.5,
-    "wcag-fail": contrast < 4.5
+    "wcag-fail": contrast < 4.5,
   });
 };
 
@@ -70,7 +70,7 @@ const updateFavicon = () => {
   document.getElementById("favicon").setAttribute("href", canvas.toDataURL());
 };
 
-const toHSL = color => {
+const toHSL = (color) => {
   const hue = Math.round(color.hue() * 360);
   // eslint-disable-next-line no-underscore-dangle
   const saturation = Math.round(color.hsl()._saturation * 100);
@@ -93,10 +93,10 @@ const gradeValues = [
   [70, 0.07, 0.05],
   [80, 0.04, 0.02],
   [90, 0.012, 0.015],
-  [100, 0, 0]
+  [100, 0, 0],
 ];
 
-const toGrade = color => {
+const toGrade = (color) => {
   const luminance = color.luminance();
   if (luminance === 0) return 100;
   if (luminance === 1) return 0;
@@ -116,15 +116,15 @@ const updateColor = (panel, otherPanel, color) => {
   panel.output.rgb.innerText = color.alpha() === 1 ? color.css() : color.cssa();
   panel.output.hex.innerText = color.hex();
   panel.output.hsl.innerText = toHSL(color);
-  panel.output.luminance.innerText = `Luminance: ${Math.round(
-    color.luminance() * 100000
-  ) / 100000}`;
+  panel.output.luminance.innerText = `Luminance: ${
+    Math.round(color.luminance() * 100000) / 100000
+  }`;
   panel.output.grade.innerText = `USWDS grade: ${toGrade(color)}`;
   panel.picker.value = color.hex();
 
   toggleClass(panel.display, {
     dark: color.isDark(),
-    light: color.isLight()
+    light: color.isLight(),
   });
 
   updateContrastRatio();
@@ -146,7 +146,7 @@ const setInputValue = (panel, value) => {
 };
 
 const preparePanels = (panel, otherPanel) => {
-  panel.input.addEventListener("input", event => {
+  panel.input.addEventListener("input", (event) => {
     const color = getColor(event.target.value);
     if (color) {
       updateColor(panel, otherPanel, color);
@@ -154,14 +154,14 @@ const preparePanels = (panel, otherPanel) => {
     }
   });
 
-  panel.picker.addEventListener("input", event => {
+  panel.picker.addEventListener("input", (event) => {
     const color = getColor(event.target.value);
     if (color) {
       setInputValue(panel, event.target.value);
     }
   });
 
-  panel.input.addEventListener("keyup", event => {
+  panel.input.addEventListener("keyup", (event) => {
     // clear input on Escape
     const key = event.key || event.keyCode;
     if (key === "Escape" || key === "Esc" || key === 27) {
@@ -169,13 +169,13 @@ const preparePanels = (panel, otherPanel) => {
     }
   });
 
-  panel.examples.forEach(example => {
+  panel.examples.forEach((example) => {
     example.addEventListener("click", () => {
       setInputValue(panel, example.innerText);
     });
   });
 
-  Object.values(panel.output).forEach(output =>
+  Object.values(panel.output).forEach((output) =>
     output.addEventListener("click", () => {
       // select output value on click
       window.getSelection().selectAllChildren(output);

@@ -1,21 +1,13 @@
 {
   "extends": [
-    "airbnb-base",
-    "prettier"
+    "@darekkay/eslint-config/base",
+    "@darekkay/eslint-config/plugins/unicorn",
+    "@darekkay/eslint-config/plugins/prettier"
   ],
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
-  "plugins": [
-    "prettier"
-  ],
-  "root": true,
-  "rules": {
-    "prettier/prettier": "error",
-    "linebreak-style": "off",
-    "no-undef": "off",
-    "prefer-destructuring": "off",
-    "radix": "off"
-  }
+  "root": true
 }

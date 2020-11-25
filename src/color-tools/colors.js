@@ -1,34 +1,35 @@
+/* eslint-disable no-undef */
 const selectElements = (name) => {
-  const display = document.getElementById(`display-${name}`);
+  const display = document.querySelector(`#display-${name}`);
   return {
     display,
-    input: document.getElementById(`input-${name}`),
-    picker: document.getElementById(`picker-${name}`),
-    examples: Array.from(document.getElementsByClassName(`example-${name}`)),
+    input: document.querySelector(`#input-${name}`),
+    picker: document.querySelector(`#picker-${name}`),
+    examples: [...document.querySelectorAll(`.example-${name}`)],
     output: {
-      hex: display.getElementsByClassName("output-hex")[0],
-      rgb: display.getElementsByClassName("output-rgb")[0],
-      hsl: display.getElementsByClassName("output-hsl")[0],
-      luminance: display.getElementsByClassName("output-luminance")[0],
-      grade: display.getElementsByClassName("output-grade")[0],
+      hex: display.querySelectorAll(".output-hex")[0],
+      rgb: display.querySelectorAll(".output-rgb")[0],
+      hsl: display.querySelectorAll(".output-hsl")[0],
+      luminance: display.querySelectorAll(".output-luminance")[0],
+      grade: display.querySelectorAll(".output-grade")[0],
     },
   };
 };
 
 const alpha = selectElements("alpha");
 const beta = selectElements("beta");
-const contrastRatio = document.getElementById("contrast-ratio");
+const contrastRatio = document.querySelector("#contrast-ratio");
 
 const defaultAlphaColor = one.color("#dea");
 const defaultBetaColor = one.color("#222");
 
 // create favicon canvas
 const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
+const context = canvas.getContext("2d");
 
 canvas.width = 16;
 canvas.height = 16;
-document.body.appendChild(canvas);
+document.body.append(canvas);
 
 const normalizeValue = (value) => (value ? value.trim() : value);
 
@@ -46,7 +47,7 @@ const updateContrastRatio = () => {
 
   // update contrast ratio
   const contrast = alphaColor.contrast(betaColor);
-  contrastRatio.innerText = Math.round(contrast * 100) / 100;
+  contrastRatio.textContent = Math.round(contrast * 100) / 100;
 
   toggleClass(contrastRatio, {
     "wcag-aaa": contrast >= 7.1,
@@ -59,15 +60,15 @@ const updateFavicon = () => {
   const alphaColor = getColor(alpha.input.value) || defaultAlphaColor;
   const betaColor = getColor(beta.input.value) || defaultBetaColor;
 
-  ctx.clearRect(0, 0, 16, 16);
+  context.clearRect(0, 0, 16, 16);
 
-  ctx.fillStyle = alphaColor.hex();
-  ctx.fillRect(0, 0, 8, 16);
+  context.fillStyle = alphaColor.hex();
+  context.fillRect(0, 0, 8, 16);
 
-  ctx.fillStyle = betaColor.hex();
-  ctx.fillRect(8, 0, 8, 16);
+  context.fillStyle = betaColor.hex();
+  context.fillRect(8, 0, 8, 16);
 
-  document.getElementById("favicon").setAttribute("href", canvas.toDataURL());
+  document.querySelector("#favicon").setAttribute("href", canvas.toDataURL());
 };
 
 const toHSL = (color) => {
@@ -101,8 +102,7 @@ const toGrade = (color) => {
   if (luminance === 0) return 100;
   if (luminance === 1) return 0;
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < gradeValues.length; i++) {
-    const limits = gradeValues[i];
+  for (const limits of gradeValues) {
     if (luminance < limits[1] && luminance > limits[2]) return limits[0];
   }
   return "-";
@@ -113,13 +113,14 @@ const updateColor = (panel, otherPanel, color) => {
   panel.display.style.background = color.cssa();
   otherPanel.display.style.color = color.cssa();
 
-  panel.output.rgb.innerText = color.alpha() === 1 ? color.css() : color.cssa();
-  panel.output.hex.innerText = color.hex();
-  panel.output.hsl.innerText = toHSL(color);
-  panel.output.luminance.innerText = `Luminance: ${
+  panel.output.rgb.textContent =
+    color.alpha() === 1 ? color.css() : color.cssa();
+  panel.output.hex.textContent = color.hex();
+  panel.output.hsl.textContent = toHSL(color);
+  panel.output.luminance.textContent = `Luminance: ${
     Math.round(color.luminance() * 100000) / 100000
   }`;
-  panel.output.grade.innerText = `USWDS grade: ${toGrade(color)}`;
+  panel.output.grade.textContent = `USWDS grade: ${toGrade(color)}`;
   panel.picker.value = color.hex();
 
   toggleClass(panel.display, {
@@ -163,6 +164,7 @@ const preparePanels = (panel, otherPanel) => {
 
   panel.input.addEventListener("keyup", (event) => {
     // clear input on Escape
+    // eslint-disable-next-line unicorn/prefer-event-key
     const key = event.key || event.keyCode;
     if (key === "Escape" || key === "Esc" || key === 27) {
       panel.input.value = "";
@@ -171,7 +173,7 @@ const preparePanels = (panel, otherPanel) => {
 
   panel.examples.forEach((example) => {
     example.addEventListener("click", () => {
-      setInputValue(panel, example.innerText);
+      setInputValue(panel, example.textContent);
     });
   });
 

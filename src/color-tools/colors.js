@@ -164,7 +164,7 @@ const preparePanels = (panel, otherPanel) => {
 
   panel.input.addEventListener("keyup", (event) => {
     // clear input on Escape
-    // eslint-disable-next-line unicorn/prefer-event-key
+    // eslint-disable-next-line unicorn/prefer-keyboard-event-key
     const key = event.key || event.keyCode;
     if (key === "Escape" || key === "Esc" || key === 27) {
       panel.input.value = "";

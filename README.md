@@ -8,7 +8,7 @@ A graphical overview of the [CSS Flexible Box Layout](https://developer.mozilla.
 
 Based on [CSS Cheats](https://github.com/sakamies/css-cheats) by @sakamies.
 
-- [Live Demo](https://darekkay.com/dev/flexbox-cheatsheet.html)
+- [Live Demo](https://darekkay.com/flexbox-cheatsheet/)
 
 ![Flexbox Cheatsheet](src/assets/img/preview-flexbox-cheatsheet.png)
 
